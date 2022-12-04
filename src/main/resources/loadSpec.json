@@ -1,0 +1,120 @@
+[
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "*": {
+        "asset": {
+          "shipment": {
+            "origin": {
+              "namedCoordinates": {
+                "longitude": ["=toDouble", 0],
+                "latitude": ["=toDouble", 0]
+              }
+            },
+            "destination": {
+              "namedCoordinates": {
+                "longitude": ["=toDouble", 0],
+                "latitude": ["=toDouble", 0]
+              }
+            },
+            "rate": {
+              "baseRateDollars": ["=toDouble"]
+            }
+          }
+        },
+        "tripMileage": {
+          "miles": ["=toDouble"]
+        },
+        "originDeadhead": {
+          "miles": ["=toDouble"]
+        }
+      }
+    }
+  },
+  {
+    "operation": "shift",
+    "spec": {
+      "*": {
+        "asset": {
+          "assetId": "[&2].assetId",
+          "status": {
+            "created": {
+              "user": "[&4].createdBy",
+              "date": "[&4].createdOn"
+            },
+            "updated": {
+              "user": "[&4].updatedBy",
+              "date": "[&4].updatedOn"
+            },
+            "lastModified": {
+              "user": "[&4].lastModifiedBy",
+              "date": "[&4].lastModifiedOn"
+            },
+            "expired": "[&3].expired"
+          },
+          "shipment": {
+            "equipmentType": "[&3].equipmentType",
+            "origin": {
+              "namedCoordinates": {
+                "longitude": "[&5].origin_lon",
+                "latitude": "[&5].origin_lat",
+                "city": "[&5].origin_city",
+                "stateProvince": "[&5].origin_stateProvince"
+              }
+            },
+            "destination": {
+              "namedCoordinates": {
+                "longitude": "[&5].destination_lon",
+                "latitude": "[&5].destination_lat",
+                "city": "[&5].destination_city",
+                "stateProvince": "[&5].destination_stateProvince"
+              }
+            },
+            "rate": {
+              "baseRateDollars": "[&4].rate",
+              "rateBasedOn": "[&4].rateBasedOn",
+              "rateMiles": "[&4].rateMiles"
+            }
+          },
+          "postersReferenceId": "[&2].posterId",
+          "ltl": "[&2].ltl",
+          "comments": "[&2].comments",
+          "count": "[&2].count",
+          "dimensions": "[&2].dimensions",
+          "stops": "[&2].stops",
+          "availability": {
+            "earliest": "[&3].availableFrom",
+            "latest": "[&3].availableTo"
+          }
+        },
+        "tripMileage": {
+          "miles": "[&2].tripMiles",
+          "method": "[&2].tripMethod"
+        },
+        "originDeadhead": {
+          "miles": "[&2].originDeadheadMiles",
+          "method": "[&2].originDeadheadMethod"
+        },
+        "callback": {
+          "userId": "[&2].callback_userId",
+          "phone": {
+            "phone": {
+              "number": "[&4].callback_phoneNumber"
+            }
+          },
+          "name": {
+            "firstName": "[&3].callback_firstName",
+            "lastName": "[&3].callback_lastName",
+            "initials": "[&3].callback_initials"
+          },
+          "companyName": "[&2].callback_companyName",
+          "displayCompany": "[&2].callback_displayCompany",
+          "postersStateProvince": "[&2].callback_postersStateProvince"
+        },
+        "creditScore": "[&1].creditScore",
+        "thirdPartyInfo": "[&1].additionalDetails",
+        "dotIds": "[&1].dotIds"
+      }
+    }
+  }
+]
